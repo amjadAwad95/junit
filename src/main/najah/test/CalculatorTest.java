@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 @DisplayName("Calculator Tests")
 @Execution(value = ExecutionMode.CONCURRENT)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CalculatorTest {
 	
     Calculator calc;
@@ -31,6 +32,7 @@ public class CalculatorTest {
 
 	@Test
 	@DisplayName("Test Add")
+	@Order(1)
 	void testAdd() {
 		assertEquals(calc.add(1, 2), 3);
 		assertEquals(calc.add(1, 2, 3), 6);
@@ -45,12 +47,14 @@ public class CalculatorTest {
 				"0,4,5",
 				"1,6,5",
 				"2,10,5"})
+	@Order(2)
 	void testDivide(float expexted , int dividend, int divisor) {
 		assertEquals(expexted,calc.divide(dividend,divisor));
 	}
 
 	@Test
 	@DisplayName("Test Divide On Zero")
+	@Order(3)
 	void testDivideOnZero() {
 		assertThrows(ArithmeticException.class, () -> {calc.divide(1,0);});
 	}
@@ -63,12 +67,14 @@ public class CalculatorTest {
 				"6,3",
 				"24,4",
 				"120,5"})
+	@Order(4)
 	void testFactorial(int expexted , int factorial) {
 		assertEquals(expexted,calc.factorial(factorial));
 	}
 
 	@Test
 	@DisplayName("Test factorial in negative numbers")
+	@Order(5)
 	void testFactorialInNegativeNumbers() {
 		assertThrows(IllegalArgumentException.class, () -> {calc.factorial(-1);});
 	}
