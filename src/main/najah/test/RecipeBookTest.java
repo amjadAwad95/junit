@@ -26,6 +26,7 @@ public class RecipeBookTest {
 	@Test
 	@DisplayName("Test Add Recipe")
 	@Order(1)
+	@Timeout(value = 1000, unit = TimeUnit.MILLISECONDS)
 	void testAddRecipe() throws RecipeException {
 		Recipe recipe = new Recipe();
 		recipe.setName("Test1");
@@ -38,6 +39,7 @@ public class RecipeBookTest {
 	@Test
 	@DisplayName("Test Add Exists Recipe")
 	@Order(2)
+	@Timeout(value = 1000, unit = TimeUnit.MILLISECONDS)
 	void testAddExistsRecipe() throws RecipeException {
 		Recipe recipe = new Recipe();
 		recipe.setName("Test1");
@@ -61,6 +63,7 @@ public class RecipeBookTest {
 	@Test
 	@DisplayName("Test Delete Recipe")
 	@Order(4)
+	@Timeout(value = 1000, unit = TimeUnit.MILLISECONDS)
 	void testDeleteRecipe() throws RecipeException {
 		assertEquals("Test1", recipeBook.deleteRecipe(0));
 		assertEquals("Test4", recipeBook.deleteRecipe(3));
@@ -70,6 +73,7 @@ public class RecipeBookTest {
 	@DisplayName("Test Delete Not Exists Recipe")
 	@Order(5)
 	@ValueSource(ints = {0, 3})
+	@Timeout(value = 1000, unit = TimeUnit.MILLISECONDS)
 	void testDeleteNotExistsRecipe(int index) throws RecipeException {
 		assertEquals("", recipeBook.deleteRecipe(index));
 	}
@@ -77,6 +81,7 @@ public class RecipeBookTest {
 	@Test
 	@DisplayName("Test Update Recipe")
 	@Order(6)
+	@Timeout(value = 1000, unit = TimeUnit.MILLISECONDS)
 	void testUpdateRecipe() throws RecipeException {
 		Recipe recipe = new Recipe();
 		recipe.setName("Test10");
@@ -88,6 +93,7 @@ public class RecipeBookTest {
 	@Test
 	@DisplayName("Test Update Not Exists Recipe")
 	@Order(7)
+	@Timeout(value = 1000, unit = TimeUnit.MILLISECONDS)
 	void testUpdateNotExistsRecipe() throws RecipeException {
 		Recipe recipe = new Recipe();
 		recipe.setName("Test10");

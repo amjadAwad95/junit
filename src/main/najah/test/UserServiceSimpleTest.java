@@ -38,12 +38,14 @@ class UserServiceSimpleTest {
 	@ParameterizedTest
 	@DisplayName("Test Invalid Email")
 	@ValueSource(strings = {"amjadawad", "amjadawad@gmail", "amjadawad.com"})
+	@Timeout(value = 1000, unit = TimeUnit.MILLISECONDS)
 	void testInvalidEmail(String email) {
 		assertEquals(false, userService.isValidEmail(email));
 	}
 
 	@Test
 	@DisplayName("Test Valid Email")
+	@Timeout(value = 1000, unit = TimeUnit.MILLISECONDS)
 	void testValidEmail() {
 		assertEquals(true, userService.isValidEmail("amjadawad@gmail.com"));
 	}
@@ -51,6 +53,7 @@ class UserServiceSimpleTest {
 	@ParameterizedTest
 	@DisplayName("Test Authenticate")
 	@CsvSource({"false,amjad,1234", "false,admin,7539", "false,amjad,8526", "true,admin,1234"})
+	@Timeout(value = 1000, unit = TimeUnit.MILLISECONDS)
 	void testInvalidAuthenticate(boolean expexted, String username, String password) {
 		assertEquals(expexted, userService.authenticate(username, password));
 	}

@@ -19,6 +19,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="junit.jupiter" level="project" />
-    <orderEntry type="library" name="junit.platform.suite.api" level="project" />
+    <orderEntry type="library" name="junit.platform.suite.api1" level="project" />
+    <orderEntry type="library" name="junit.platform.runner" level="project" />
   </component>
 </module>
