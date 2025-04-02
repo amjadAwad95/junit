@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserServiceSimpleTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">All in Junit5_HW Coverage Results</a> &gt; <a href="index.source.html" class="el_package">main.najah.test</a> &gt; <span class="el_source">UserServiceSimpleTest.java</span></div><h1>UserServiceSimpleTest.java</h1><pre class="source lang-java linenums">package main.najah.test;
+
+import main.najah.code.UserService;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@Execution(ExecutionMode.CONCURRENT)
+<span class="fc" id="L16">class UserServiceSimpleTest {</span>
+
+	static UserService userService;
+
+	@BeforeAll
+	static void init() {
+<span class="fc" id="L22">		userService = new UserService();</span>
+<span class="fc" id="L23">		System.out.println(&quot;Start UserServiceSimpleTest&quot;);</span>
+<span class="fc" id="L24">	}</span>
+
+	@BeforeEach
+	void setUp() throws Exception {
+<span class="fc" id="L28">		System.out.println(&quot;Start Test&quot;);</span>
+<span class="fc" id="L29">	}</span>
+
+	@Test
+	@DisplayName(&quot;Test Null Email&quot;)
+	@Timeout(value = 1000, unit = TimeUnit.MILLISECONDS)
+	void testNullEmail() {
+<span class="fc" id="L35">		assertEquals(false, userService.isValidEmail(null));</span>
+<span class="fc" id="L36">	}</span>
+
+	@ParameterizedTest
+	@DisplayName(&quot;Test Invalid Email&quot;)
+	@ValueSource(strings = {&quot;amjadawad&quot;, &quot;amjadawad@gmail&quot;, &quot;amjadawad.com&quot;})
+	void testInvalidEmail(String email) {
+<span class="fc" id="L42">		assertEquals(false, userService.isValidEmail(email));</span>
+<span class="fc" id="L43">	}</span>
+
+	@Test
+	@DisplayName(&quot;Test Valid Email&quot;)
+	void testValidEmail() {
+<span class="fc" id="L48">		assertEquals(true, userService.isValidEmail(&quot;amjadawad@gmail.com&quot;));</span>
+<span class="fc" id="L49">	}</span>
+
+	@ParameterizedTest
+	@DisplayName(&quot;Test Authenticate&quot;)
+	@CsvSource({&quot;false,amjad,1234&quot;, &quot;false,admin,7539&quot;, &quot;false,amjad,8526&quot;, &quot;true,admin,1234&quot;})
+	void testInvalidAuthenticate(boolean expexted, String username, String password) {
+<span class="fc" id="L55">		assertEquals(expexted, userService.authenticate(username, password));</span>
+<span class="fc" id="L56">	}</span>
+
+
+	@AfterEach
+	void tearDown() throws Exception {
+<span class="fc" id="L61">		System.out.println(&quot;End Test&quot;);</span>
+<span class="fc" id="L62">	}</span>
+
+	@AfterAll
+	static void end() {
+<span class="fc" id="L66">		System.out.println(&quot;End UserServiceSimpleTest&quot;);</span>
+<span class="fc" id="L67">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

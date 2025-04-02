@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CalculatorTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">All in Junit5_HW Coverage Results</a> &gt; <a href="index.source.html" class="el_package">main.najah.test</a> &gt; <span class="el_source">CalculatorTest.java</span></div><h1>CalculatorTest.java</h1><pre class="source lang-java linenums">package main.najah.test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.*;
+
+import main.najah.code.Calculator;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import java.util.concurrent.TimeUnit;
+
+@DisplayName(&quot;Calculator Tests&quot;)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+<span class="fc" id="L15">public class CalculatorTest {</span>
+	
+    Calculator calc;
+
+	@BeforeAll
+	static  void init() {
+<span class="fc" id="L21">		System.out.println(&quot;Start Test&quot;);</span>
+<span class="fc" id="L22">	}</span>
+
+	@BeforeEach
+	void setUp() throws Exception {
+<span class="fc" id="L26">		calc = new Calculator();</span>
+<span class="fc" id="L27">	}</span>
+
+	@Test
+	@DisplayName(&quot;Test Add&quot;)
+	@Order(1)
+	void testAdd() {
+<span class="fc" id="L33">		assertEquals(calc.add(1, 2), 3);</span>
+<span class="fc" id="L34">		assertEquals(calc.add(1, 2, 3), 6);</span>
+<span class="fc" id="L35">		assertEquals(calc.add(1,2,3,4,5,6,7,8,9), 45);</span>
+<span class="fc" id="L36">	}</span>
+
+	@ParameterizedTest
+	@DisplayName(&quot;Test Divide&quot;)
+	@CsvSource({&quot;0,1,2&quot;,
+				&quot;0,2,3&quot;,
+				&quot;0,3,4&quot;,
+				&quot;0,4,5&quot;,
+				&quot;1,6,5&quot;,
+				&quot;2,10,5&quot;})
+	@Order(2)
+	void testDivide(float expexted , int dividend, int divisor) {
+<span class="fc" id="L48">		assertEquals(expexted,calc.divide(dividend,divisor));</span>
+<span class="fc" id="L49">	}</span>
+
+	@Test
+	@DisplayName(&quot;Test Divide On Zero&quot;)
+	@Order(3)
+	void testDivideOnZero() {
+<span class="pc" id="L55">		assertThrows(ArithmeticException.class, () -&gt; {calc.divide(1,0);});</span>
+<span class="fc" id="L56">	}</span>
+
+	@ParameterizedTest
+	@DisplayName(&quot;Test factorial&quot;)
+	@CsvSource({&quot;1,0&quot;,
+				&quot;1,1&quot;,
+				&quot;2,2&quot;,
+				&quot;6,3&quot;,
+				&quot;24,4&quot;,
+				&quot;120,5&quot;})
+	@Order(4)
+	void testFactorial(int expexted , int factorial) {
+<span class="fc" id="L68">		assertEquals(expexted,calc.factorial(factorial));</span>
+<span class="fc" id="L69">	}</span>
+
+	@Test
+	@DisplayName(&quot;Test factorial in negative numbers&quot;)
+	@Order(5)
+	void testFactorialInNegativeNumbers() {
+<span class="pc" id="L75">		assertThrows(IllegalArgumentException.class, () -&gt; {calc.factorial(-1);});</span>
+<span class="fc" id="L76">	}</span>
+
+	@Test
+	@DisplayName(&quot;Test Time out&quot;)
+	@Timeout(value = 1000 , unit = TimeUnit.MILLISECONDS)
+	@Disabled
+	void testTimeOut() throws InterruptedException {
+		try{
+<span class="nc" id="L84">			Thread.sleep(2000);</span>
+<span class="nc" id="L85">			assertTrue(true);</span>
+<span class="nc" id="L86">		}catch (InterruptedException e){</span>
+<span class="nc" id="L87">			e.printStackTrace();</span>
+<span class="nc" id="L88">		}</span>
+<span class="nc" id="L89">	}</span>
+
+	@AfterAll
+	static void end() {
+<span class="fc" id="L93">		System.out.println(&quot;End Test&quot;);</span>
+<span class="fc" id="L94">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

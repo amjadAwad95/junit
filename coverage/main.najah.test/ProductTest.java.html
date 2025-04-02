@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProductTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">All in Junit5_HW Coverage Results</a> &gt; <a href="index.source.html" class="el_package">main.najah.test</a> &gt; <span class="el_source">ProductTest.java</span></div><h1>ProductTest.java</h1><pre class="source lang-java linenums">package main.najah.test;
+
+import main.najah.code.Product;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@DisplayName(&quot;Product Tests&quot;)
+@Execution(ExecutionMode.CONCURRENT)
+<span class="fc" id="L17">public class ProductTest {</span>
+	Product p;
+
+	@BeforeEach
+	void setUp() throws Exception {
+<span class="fc" id="L22">		System.out.println(&quot;Start Test&quot;);</span>
+<span class="fc" id="L23">		p = new Product(&quot;BO3&quot;, 60);</span>
+<span class="fc" id="L24">	}</span>
+
+	@Test
+	@Disabled(&quot;For fixed the test case create the price 50&quot;)
+	@DisplayName(&quot;Test Change Price&quot;)
+	void testChangePrice() {
+<span class="nc" id="L30">		fail(&quot;Not yet implemented&quot;);</span>
+<span class="nc" id="L31">	}</span>
+
+	@Test
+	@DisplayName(&quot;Test Negative Price&quot;)
+	void testNegativePrice() {
+<span class="fc" id="L36">		assertThrows(IllegalArgumentException.class, () -&gt; {</span>
+<span class="nc" id="L37">			Product product = new Product(&quot;BO3&quot;, -60);</span>
+<span class="nc" id="L38">		});</span>
+<span class="fc" id="L39">	}</span>
+
+	@ParameterizedTest
+	@DisplayName(&quot;Test Invalid Discount&quot;)
+	@ValueSource(doubles = {-1, 51})
+	void testInvalidDiscount(double discount) {
+<span class="fc" id="L45">		assertThrows(IllegalArgumentException.class, () -&gt; {</span>
+<span class="nc" id="L46">			p.applyDiscount(discount);</span>
+<span class="nc" id="L47">		});</span>
+<span class="fc" id="L48">	}</span>
+
+	@Test
+	@DisplayName(&quot;Test Apply Discount&quot;)
+	void testApplyDiscount() {
+<span class="fc" id="L53">		p.applyDiscount(0.5);</span>
+<span class="fc" id="L54">		assertEquals(0.5, p.getDiscount());</span>
+<span class="fc" id="L55">	}</span>
+
+	@Test
+	@DisplayName(&quot;Test Get Price&quot;)
+	void testGetPrice() {
+<span class="fc" id="L60">		assertEquals(60, p.getPrice());</span>
+<span class="fc" id="L61">	}</span>
+
+	@ParameterizedTest
+	@DisplayName(&quot;Test Get Final Price&quot;)
+	@CsvSource({&quot;45,25&quot;, &quot;48,20&quot;, &quot;30,50&quot;})
+	void testGetFinalPrice(double expexted, double discount) {
+<span class="fc" id="L67">		p.applyDiscount(discount);</span>
+<span class="fc" id="L68">		assertEquals(expexted, p.getFinalPrice());</span>
+<span class="fc" id="L69">	}</span>
+
+	@Test
+	@DisplayName(&quot;Test Get Price With Timeout&quot;)
+	@Timeout(value = 1000, unit = TimeUnit.MILLISECONDS)
+	void testGetPriceWithTimeout() throws InterruptedException {
+<span class="fc" id="L75">		assertEquals(60, p.getPrice());</span>
+<span class="fc" id="L76">	}</span>
+
+	@AfterEach
+	void tearDown() throws Exception {
+<span class="fc" id="L80">		System.out.println(&quot;End Test&quot;);</span>
+<span class="fc" id="L81">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
